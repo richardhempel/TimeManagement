@@ -169,9 +169,10 @@ HfuPerson >> timeCheckedInDay: aDay month: aMonth year: aYear [
 	| theBuffer |
 	theBuffer := Duration new.
 	theBuffer totalSeconds: 0 microseconds: 0.
-	self presentPeriodList do: [:eachPeriod | 
-												(eachPeriod date dayOfMonth = aDay and: (eachPeriod date monthIndex = aMonth and: eachPeriod date year = aYear))
-												ifTrue: [theBuffer := theBuffer + eachPeriod timeCheckedIn]].
+	self presentPeriodList do: [:eachPeriod | | theTimeCheckedIn |
+												theTimeCheckedIn := (eachPeriod stampOut - eachPeriod stampIn).
+												(eachPeriod stampIn dayOfMonth = aDay and: (eachPeriod stampIn monthIndex = aMonth and: eachPeriod stampIn year = aYear))
+												ifTrue: [theBuffer := theBuffer + theTimeCheckedIn]].
 	^theBuffer
 ]
 
@@ -181,9 +182,22 @@ HfuPerson >> timeCheckedInMonth: aMonth year: aYear [
 	| theBuffer |
 	theBuffer := Duration new.
 	theBuffer totalSeconds: 0 microseconds: 0.
-	self presentPeriodList do: [:eachPeriod | 
-												(eachPeriod date monthIndex = aMonth and: eachPeriod date year = aYear)
-												ifTrue: [theBuffer := theBuffer + eachPeriod timeCheckedIn]].
+	self presentPeriodList do: [:eachPeriod | | theTimeCheckedIn |
+												theTimeCheckedIn := (eachPeriod stampOut - eachPeriod stampIn).
+												(eachPeriod stampIn monthIndex = aMonth and: eachPeriod stampIn year = aYear)
+												ifTrue: [theBuffer := theBuffer + theTimeCheckedIn]].
+	^theBuffer
+]
+
+{ #category : 'Not categorized' }
+HfuPerson >> timeCheckedInTotal [
+	"Returns the total time checked in for this person instance"
+	| theBuffer |
+	theBuffer := Duration new.
+	theBuffer totalSeconds: 0 microseconds: 0.
+	self presentPeriodList do: [:eachPeriod | | theTimeCheckedIn |
+												theTimeCheckedIn := (eachPeriod stampOut - eachPeriod stampIn).
+												theBuffer := theBuffer + theTimeCheckedIn].
 	^theBuffer
 ]
 
@@ -193,8 +207,9 @@ HfuPerson >> timeCheckedInYear: aYear [
 	| theBuffer |
 	theBuffer := Duration new.
 	theBuffer totalSeconds: 0 microseconds: 0.
-	self presentPeriodList do: [:eachPeriod | 
-												(eachPeriod date year = aYear)
-												ifTrue: [theBuffer := theBuffer + eachPeriod timeCheckedIn]].
+	self presentPeriodList do: [:eachPeriod | | theTimeCheckedIn |
+												theTimeCheckedIn := (eachPeriod stampOut - eachPeriod stampIn).
+												(eachPeriod stampIn year = aYear)
+												ifTrue: [theBuffer := theBuffer + theTimeCheckedIn]].
 	^theBuffer
 ]
