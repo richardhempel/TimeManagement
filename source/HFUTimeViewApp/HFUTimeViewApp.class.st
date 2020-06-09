@@ -8,6 +8,8 @@ Class {
 HFUTimeViewApp class >> startUp [
 	| theHttpServer |
 	theHttpServer := (Me5SstHttpServer startUpHttpServerOnPort: '9033' serverApplicationClass: HFUTimeViewApp).
+	theHttpServer addViewClass: HFUPersonManagmentView.
+	theHttpServer addViewClass: HFUPersonCreationView.
 	theHttpServer addViewClass: HFUStampScanView.
 	theHttpServer addViewClass: HFUStampSummaryView.
 	HfuPerson createDefaultPersons.
