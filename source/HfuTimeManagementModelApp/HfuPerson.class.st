@@ -5,7 +5,8 @@ Class {
 		'lastName',
 		'firstName',
 		'presentPeriodList',
-		'currentlyCheckedIn'
+		'currentlyCheckedIn',
+		'id'
 	],
 	#classVars : [
 		'Persons',
@@ -65,15 +66,15 @@ HfuPerson class >> createDefaultPersons [
 	| theDefaultPerson1 theDefaultPerson2 theDefaultPerson3 theDefaultPerson4 theDefaultPerson5 |
 
 	theDefaultPerson1 := HfuPerson new.
-	theDefaultPerson1  lastName: 'Omar'; firstName: 'Saleh';  presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
+	theDefaultPerson1  lastName: 'Omar'; firstName: 'Saleh';  id: '001'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
 	theDefaultPerson2 := HfuPerson new.
-	theDefaultPerson2  lastName: 'Weinberger'; firstName: 'Tom'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
+	theDefaultPerson2  lastName: 'Weinberger'; firstName: 'Tom'; id: '002'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
 	theDefaultPerson3 := HfuPerson new.
-	theDefaultPerson3  lastName: 'Bochyn'; firstName: 'Pascal'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
+	theDefaultPerson3  lastName: 'Bochyn'; firstName: 'Pascal';id: '003'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
 	theDefaultPerson4 := HfuPerson new.
-	theDefaultPerson4  lastName: 'Hempel'; firstName: 'Richard'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
+	theDefaultPerson4  lastName: 'Hempel'; firstName: 'Richard';id: '004'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
 	theDefaultPerson5 := HfuPerson new.
-	theDefaultPerson5  lastName: 'Petrov'; firstName: 'Anton'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
+	theDefaultPerson5  lastName: 'Petrov'; firstName: 'Anton';id: '005'; presentPeriodList: OrderedCollection new; currentlyCheckedIn: false; yourself.
 
 	self persons: Dictionary new.
 	self persons at: '001' put: theDefaultPerson1.
@@ -81,6 +82,31 @@ HfuPerson class >> createDefaultPersons [
 	self persons at: '003' put: theDefaultPerson3.
 	self persons at: '004' put: theDefaultPerson4.
 	self persons at: '005' put: theDefaultPerson5
+]
+
+{ #category : 'Not categorized' }
+HfuPerson class >> isValidID: aString [
+"Determines whether or not aString is a valid ID"
+
+	|theResult|
+	theResult := true.
+	aString do: [ :eachChar | 
+		eachChar isDigit
+			ifFalse: [theResult := false]].
+	^theResult
+]
+
+{ #category : 'Not categorized' }
+HfuPerson class >> isValidName: aString [
+"Determines whether or not aString is a valid Name"
+
+	|theResult|
+	theResult := true.
+	aString do: [ :eachChar | 
+		eachChar isLetter
+			ifFalse: [theResult := false]].
+	^theResult
+	
 ]
 
 { #category : 'Accessor' }
@@ -137,6 +163,18 @@ HfuPerson >> firstName [
 HfuPerson >> firstName: anObject [
 
 	firstName := anObject
+]
+
+{ #category : 'Accessor' }
+HfuPerson >> id [
+
+	^id
+]
+
+{ #category : 'Accessor' }
+HfuPerson >> id: anObject [
+
+	id := anObject
 ]
 
 { #category : 'Accessor' }
