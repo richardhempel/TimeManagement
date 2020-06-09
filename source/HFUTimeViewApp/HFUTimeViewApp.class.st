@@ -6,10 +6,10 @@ Class {
 
 { #category : 'Not categorized' }
 HFUTimeViewApp class >> startUp [
-
-|theHttpServer|
-theHttpServer := (Me5SstHttpServer startUpHttpServerOnPort: '9004' serverApplicationClass: HFUTimeViewApp).
-theHttpServer addViewClass: HFUPersonManagmentView.
-theHttpServer addViewClass: HFUPersonCreationView 
-
+	| theHttpServer |
+	theHttpServer := (Me5SstHttpServer startUpHttpServerOnPort: '9033' serverApplicationClass: HFUTimeViewApp).
+	theHttpServer addViewClass: HFUStampScanView.
+	theHttpServer addViewClass: HFUStampSummaryView.
+	HfuPerson createDefaultPersons.
+	HfuPerson allPresentPeriods:  OrderedCollection new
 ]
