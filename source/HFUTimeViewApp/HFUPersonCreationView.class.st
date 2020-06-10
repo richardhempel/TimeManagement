@@ -27,7 +27,7 @@ HFUPersonCreationView >> createComponents [
 	"creates the view"
 	self 
 		addChild: (Me5FormPortlet new
-			title: 'Person hinzuf�gen';
+			title: 'Person hinzufï¿½gen';
 			addChildToBody: (Me5Section new
 				addChildToBody: (Me5Row new
 					addChild: (firstNameTextField:=Me5TextField new

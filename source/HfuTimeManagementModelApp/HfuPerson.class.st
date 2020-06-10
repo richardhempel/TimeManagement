@@ -29,7 +29,7 @@ HfuPerson class >> allPresentPeriods: anObject [
 
 { #category : 'Not categorized' }
 HfuPerson class >> chipScanned: anIdetification [
-	"Creates a new Stamp for the Person with the matching identification
+"Creates a new Stamp for the Person with the matching identification
 	 and inverts the status of currentlyCheckedIn"
 	| thePerson thePresentPeriod |
 	thePerson := self persons at: anIdetification.
@@ -41,7 +41,6 @@ HfuPerson class >> chipScanned: anIdetification [
 					thePerson currentlyCheckedIn: true.] 
 		ifFalse: [thePerson presentPeriodList first stampOut: DateAndTime now.
 					thePerson currentlyCheckedIn: false]
-	
 ]
 
 { #category : 'Not categorized' }
