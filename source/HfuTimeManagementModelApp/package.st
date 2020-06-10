@@ -1,4 +1,4 @@
 Package {
 	#name : 'HfuTimeManagementModelApp',
-	#vaPrerequisites : ['CommonFileSystem, HFUStampScanView']
+	#vaPrerequisites : ['CommonFileSystem']
 }
