@@ -35,13 +35,11 @@ HfuPerson class >> chipScanned: anIdetification [
 	thePerson := self persons at: anIdetification.
 	thePerson currentlyCheckedIn = false
 		ifTrue: [thePresentPeriod := HfuPresentPeriod new.
-					HFUStampScanView clockIn: thePerson.
 					thePresentPeriod stampIn: DateAndTime now.
 					thePerson presentPeriodList  addFirst: thePresentPeriod.
 					self allPresentPeriods addFirst: thePresentPeriod.
 					thePerson currentlyCheckedIn: true.] 
 		ifFalse: [thePerson presentPeriodList first stampOut: DateAndTime now.
-					HFUStampScanView clockOut: thePerson.
 					thePerson currentlyCheckedIn: false]
 	
 ]
