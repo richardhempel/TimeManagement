@@ -27,7 +27,7 @@ HFUPersonCreationView >> createComponents [
 	"creates the view"
 	self 
 		addChild: (Me5FormPortlet new
-			title: 'Person hinzufï¿½gen';
+			title: 'Person hinzufÃ¯Â¿Â½gen';
 			addChildToBody: (Me5Section new
 				addChildToBody: (Me5Row new
 					addChild: (firstNameTextField:=Me5TextField new
@@ -203,7 +203,8 @@ HFUPersonCreationView >> saveChangesClicked [
 				ifFalse: [thePerson := HfuPerson persons at:(self idTextFieldValue)].
 			thePerson firstName: (self firstNameTextFieldValue);lastName:(self lastNameTextFieldValue);id:(self idTextFieldValue) yourself.
 			HfuPerson persons at:(self idTextFieldValue) put: thePerson.
-			self replaceView: HFUPersonManagmentView new]
+			self replaceView: HFUPersonManagmentView new].
+	HfuPerson savePersons.
 ]
 
 { #category : 'Accessing' }

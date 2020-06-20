@@ -12,6 +12,4 @@ HFUTimeViewApp class >> startUp [
 	theHttpServer addViewClass: HFUPersonCreationView.
 	theHttpServer addViewClass: HFUStampScanView.
 	theHttpServer addViewClass: HFUStampSummaryView.
-	HfuPerson createDefaultPersons.
-	HfuPerson allPresentPeriods:  OrderedCollection new
 ]

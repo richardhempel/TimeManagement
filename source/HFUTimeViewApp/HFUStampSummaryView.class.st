@@ -25,7 +25,7 @@ self
 		yourself);
 		addChild: (thePortlet:= Me5Portlet new
 			icon: Me5I newFasStamp;
-			title: 'Übersicht';
+			title: 'Ãœbersicht';
 			"addChildToHeadTools: (Me5A newIconOnlySuccess
 					leftIcon: Me5I newFasRedo;
 					setRoundStyle;
@@ -75,10 +75,10 @@ HFUStampSummaryView >> rowClicked: anEvent [
 	thePerson := HfuPerson persons at: ((anEvent component children at: 1)text).
 	theContext removeChild: the2ndPortlet.
 	theContext addChild: (the2ndPortlet := Me5Portlet new
-					title: ('Stempelübersicht für %1' bindWith:thePerson firstName);
+					title: ('StempelÃ¼bersicht fÃ¼r %1' bindWith:thePerson firstName);
 		addChildToBody: (theUserTable := Me5Table new
 				addChildToHead: (Me5TableRow new
-						"addTableHeaderWithText: ('Einstempelübersicht für: %1' bindWith: ( '%1 - Eingestempelt am:' bindWith:thePerson firstName));"
+						"addTableHeaderWithText: ('EinstempelÃ¼bersicht fÃ¼r: %1' bindWith: ( '%1 - Eingestempelt am:' bindWith:thePerson firstName));"
 						addTableHeaderWithText: ('Eingestempelt am');
 				yourself);
 				setStripedStyle;

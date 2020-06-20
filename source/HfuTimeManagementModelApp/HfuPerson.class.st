@@ -9,6 +9,7 @@ Class {
 		'id'
 	],
 	#classVars : [
+		'Scanning',
 		'Persons',
 		'AllPresentPeriods'
 	],
@@ -84,6 +85,13 @@ HfuPerson class >> createDefaultPersons [
 ]
 
 { #category : 'Not categorized' }
+HfuPerson class >> initiate [
+	"Loads saved persons and present periods. Then runs readFile"
+	HfuPerson loadPersons.
+	
+]
+
+{ #category : 'Not categorized' }
 HfuPerson class >> isValidID: aString [
 "Determines whether or not aString is a valid ID"
 
@@ -108,6 +116,24 @@ HfuPerson class >> isValidName: aString [
 	
 ]
 
+{ #category : 'Not categorized' }
+HfuPerson class >> loadPersons [
+"Loads all Persons from the persons.json File"
+	| theFile theJson |
+	theFile := CfsReadWriteFileStream open: 'persons.json'.
+	theJson := theFile contents.
+	self persons: theJson asJsonDictionary deserializeFromJsonCollection.
+]
+
+{ #category : 'Not categorized' }
+HfuPerson class >> loadPresentPeriods [
+"Loads all Persons from the persons.json File"
+	| theFile theJson |
+	theFile := CfsReadWriteFileStream open: 'presentPeriods.json'.
+	theJson := theFile contents.
+	self allPresentPeriods: theJson asJsonDictionary deserializeFromJsonCollection.
+]
+
 { #category : 'Accessor' }
 HfuPerson class >> persons [
 
@@ -124,8 +150,10 @@ HfuPerson class >> persons: anObject [
 HfuPerson class >> readFile [
 	"If the file isn't empty the id is given to chipScanned:"
 	| theDelay |
-	theDelay := Delay forSeconds: 5.
-	1 to: 5 do: [:i |
+	theDelay := Delay forSeconds: 1.
+	self scanning: true.
+	[
+	[self scanning] whileTrue: [
 		[
 			| theFile |
 			self copyFile
@@ -133,11 +161,44 @@ HfuPerson class >> readFile [
 				theFile := CfsReadWriteFileStream open: 'cache.txt'.
 				self chipScanned: theFile contents.
 			]
-		] fork.
+		].
 		theDelay wait.
 	]
+	] fork
 	
 	
+]
+
+{ #category : 'Not categorized' }
+HfuPerson class >> savePersons [
+"Saves all Persons to the persons.json File"
+	| theFile |
+	theFile := CfsReadWriteFileStream openEmpty: 'persons.json'.
+	theFile nextPutAll: self persons serializeJson asJsonString.
+	theFile flush.
+	theFile close.
+]
+
+{ #category : 'Not categorized' }
+HfuPerson class >> savePresentPeriods [
+"Saves all present periods to the presentPeriods.json File"
+	| theFile |
+	theFile := CfsReadWriteFileStream openEmpty: 'presentPeriods.json'.
+	theFile nextPutAll: self allPresentPeriods serializeJson asJsonString.
+	theFile flush.
+	theFile close.
+]
+
+{ #category : 'Accessor' }
+HfuPerson class >> scanning [
+
+	^Scanning
+]
+
+{ #category : 'Accessor' }
+HfuPerson class >> scanning: anObject [
+
+	Scanning := anObject
 ]
 
 { #category : 'Accessor' }
