@@ -116,7 +116,8 @@ HFUPersonManagmentView >> removePersonFromDatabase: aMe5TableRow [
 "Removes the HfuPerson from the Database and also removes the associated row from the personTable"
 
 	HfuPerson persons removeKey: (aMe5TableRow childAt: 1) componentText ifAbsent: nil.
-	aMe5TableRow removeComponent
+	aMe5TableRow removeComponent.
+	HfuPerson savePersons.
 ]
 
 { #category : 'Events' }
