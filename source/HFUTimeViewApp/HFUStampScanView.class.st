@@ -13,6 +13,8 @@ HFUStampScanView >> chipScanned [
 	ifTrue: [
 		self clockIn: thePerson]
 	ifFalse: [self clockOut: thePerson].
+	HfuPerson savePersons.
+	HfuPerson savePresentPeriods.
 ]
 
 { #category : 'Not categorized' }

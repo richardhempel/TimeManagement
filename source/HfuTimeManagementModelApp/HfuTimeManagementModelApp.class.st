@@ -6,5 +6,7 @@ Class {
 
 { #category : 'Not categorized' }
 HfuTimeManagementModelApp class >> startUp [
+	HfuPerson loadPersons.
+	HfuPerson loadPresentPeriods.
 	HfuPerson readFile.
 ]
