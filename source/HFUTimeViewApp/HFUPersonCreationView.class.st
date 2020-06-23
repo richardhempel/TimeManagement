@@ -27,7 +27,7 @@ HFUPersonCreationView >> createComponents [
 	"creates the view"
 	self 
 		addChild: (Me5FormPortlet new
-			title: 'Person hinzufÃ¯Â¿Â½gen';
+			title: 'Person hinzuf&uuml;gen';
 			addChildToBody: (Me5Section new
 				addChildToBody: (Me5Row new
 					addChild: (firstNameTextField:=Me5TextField new
@@ -114,30 +114,36 @@ HFUPersonCreationView >> hasValidEntries [
 	theResult := true.
 	(HfuPerson isValidName: (self firstNameTextFieldValue)) 
 		ifTrue: [self firstNameTextField 
-			setSuccessStyle;
-			leftOuterIcon: Me5I newFasUser setSuccessFontStyle;
+			clearDangerText;
+			leftOuterIcon: Me5I newFasUser resetFontStyle;
 			yourself]
 		ifFalse: [self firstNameTextField 
-			setDangerStyle; "dangerText: "
+			dangerText: 'Namen d&uuml;rfen nur aus lateinischen Buchstaben bestehen';
 			leftOuterIcon: Me5I newFasUser setDangerFontStyle;
 			yourself.
 			theResult := false].
 	(HfuPerson isValidName: (self lastNameTextFieldValue)) 
 		ifTrue: [self lastNameTextField 
-			setSuccessStyle;
-			leftOuterIcon: Me5I newFasUser setSuccessFontStyle;
+			clearDangerText;
+			leftOuterIcon: Me5I newFasUser resetFontStyle;
 			yourself]
 		ifFalse: [self lastNameTextField 
-			setDangerStyle; "dangerText: "
+			dangerText: 'Namen d&uuml;rfen nur aus lateinischen Buchstaben bestehen';
 			leftOuterIcon: Me5I newFasUser setDangerFontStyle.
 			theResult := false].
 	(HfuPerson isValidID: (self idTextFieldValue)) 
-		ifTrue: [self idTextField  
-			setSuccessStyle;
-			leftOuterIcon: Me5I newFasIdBadge setSuccessFontStyle;
-			yourself]
-		ifFalse: [self firstNameTextField 
-			setDangerStyle; "dangerText: "
+		ifTrue: [self idTextField
+			clearDangerText;
+			leftOuterIcon: Me5I newFasIdBadge resetFontStyle;
+			yourself.
+			self willCreateNewPerson
+				ifTrue: [
+					(HfuPerson persons includesKey: self idTextFieldValue) ifTrue: [self idTextField
+						dangerText: 'ID ist bereits vergeben';
+						leftOuterIcon: Me5I newFasIdBadge setDangerFontStyle.
+						theResult := false]]]
+		ifFalse: [self idTextField 
+			dangerText: 'ID darf nur aus Zahlen bestehen';
 			leftOuterIcon: Me5I newFasIdBadge setDangerFontStyle.
 			theResult := false].
 	^theResult

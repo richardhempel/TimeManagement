@@ -12,7 +12,7 @@ Class {
 	#category : 'HFUTimeViewApp'
 }
 
-{ #category : 'Not categorized' }
+{ #category : 'Initial-Events' }
 HFUStampSummaryView >> createComponents [
 
 theContext := self.
@@ -25,7 +25,7 @@ self
 		yourself);
 		addChild: (thePortlet:= Me5Portlet new
 			icon: Me5I newFasStamp;
-			title: 'Ãœbersicht';
+			title: '&Uuml;bersicht';
 			"addChildToHeadTools: (Me5A newIconOnlySuccess
 					leftIcon: Me5I newFasRedo;
 					setRoundStyle;
@@ -47,35 +47,44 @@ self
 yourself.
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Events' }
+HFUStampSummaryView >> message [
+
+	"<^self>"
+	"Answer the receiver"
+
+	self
+]
+
+{ #category : 'Internal' }
 HFUStampSummaryView >> presentPeriodListNotEmpty: anPerson [
 	anPerson presentPeriodList notEmpty
 	ifTrue: [^self printShortDateAndTime: anPerson presentPeriodList first stampIn] ifFalse: [^'Kein Stempelvorgang aufgezeichnet']
 	
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Internal' }
 HFUStampSummaryView >> presentPeriodListNotEmptyIn: anPerson [
 	anPerson presentPeriodList notEmpty
 	ifTrue: [^anPerson presentPeriodList first stampIn] ifFalse: [^'Kein Einstempeln aufgezeichnet']
 	
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Internal' }
 HFUStampSummaryView >> presentPeriodListNotEmptyOut: anPerson [
 	anPerson presentPeriodList notEmpty
 	ifTrue: [^anPerson presentPeriodList first stampIn] ifFalse: [^anPerson presentPeriodList first stampOut]
 	
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Events' }
 HFUStampSummaryView >> rowClicked: anEvent [
 	|thePerson|
 
 	thePerson := HfuPerson persons at: ((anEvent component children at: 1)text).
 	theContext removeChild: the2ndPortlet.
 	theContext addChild: (the2ndPortlet := Me5Portlet new
-					title: ('StempelÃ¼bersicht fÃ¼r %1' bindWith:thePerson firstName);
+					title: ('Stempel&uuml;bersicht f&uuml;r %1' bindWith:thePerson firstName);
 		addChildToBody: (theUserTable := Me5Table new
 				addChildToHead: (Me5TableRow new
 						"addTableHeaderWithText: ('EinstempelÃ¼bersicht fÃ¼r: %1' bindWith: ( '%1 - Eingestempelt am:' bindWith:thePerson firstName));"
@@ -104,7 +113,7 @@ HFUStampSummaryView >> rowClicked: anEvent [
 "
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Events' }
 HFUStampSummaryView >> updateTable [
 	|theClockedInPersons theClockedOutPersons|
 	theTable removeAllChildrenFromBody.

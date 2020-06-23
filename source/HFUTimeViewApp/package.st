@@ -1,4 +1,4 @@
 Package {
 	#name : 'HFUTimeViewApp',
-	#vaPrerequisites : ['HfuTimeManagementModelApp','Kernel','Me5MetronicApp']
+	#vaPrerequisites : ['HfuTimeManagementModelApp','Me5MetronicApp']
 }

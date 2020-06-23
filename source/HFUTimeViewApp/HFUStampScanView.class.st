@@ -35,7 +35,7 @@ HFUStampScanView >> clockOut: anUser [
 	self showDangerNotificationWithTitle: theUser, theMessagePart1, theMessagePart2.
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'Initial-Events' }
 HFUStampScanView >> createComponents [
 	self	
 			addChild: (Me5Portlet new
